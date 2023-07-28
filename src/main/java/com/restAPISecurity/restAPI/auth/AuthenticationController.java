@@ -1,4 +1,4 @@
-package com.restAPISecurity.restAPI.controller;
+package com.restAPISecurity.restAPI.auth;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
