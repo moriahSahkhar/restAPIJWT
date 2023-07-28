@@ -26,12 +26,7 @@ public class ApplicationConfig {
 		return username -> userRepo.findByEmail(username)
 				.orElseThrow(() -> new UsernameNotFoundException("User Not Found"));
 	}
-
-	@Bean
-	public JwtAuthenticationFilter jwtAuthenticationFilter() {
-		return new JwtAuthenticationFilter();
-	}
-
+	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
