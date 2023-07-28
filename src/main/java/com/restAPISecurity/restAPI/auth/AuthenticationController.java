@@ -12,11 +12,12 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
-	
-	private AuthenticationService authenticationService;
+
+	private final AuthenticationService authenticationService;
 	
 	@PostMapping("/register")
 	public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request){
+		System.out.println("HERE");
 		return ResponseEntity.ok(authenticationService.register(request));
 	}
 	

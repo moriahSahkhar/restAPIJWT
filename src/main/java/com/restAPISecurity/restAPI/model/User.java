@@ -30,14 +30,9 @@ import lombok.NoArgsConstructor;
 @Table(name = "t_user")
 public class User implements UserDetails{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
 	@Email(message = "Invalid Email")
 	private String email;

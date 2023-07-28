@@ -15,15 +15,15 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-	private UserRepo userRepo;
-	private PasswordEncoder passwordEncoder;
-	private JwtService jwtService;
-	private AuthenticationManager authenticationManager;
+	private final UserRepo userRepo;
+	private final PasswordEncoder passwordEncoder;
+	private final JwtService jwtService;
+	private final AuthenticationManager authenticationManager;
 
 	public AuthenticationResponse register(RegisterRequest request) {
 		var user = User.builder()
-				.email(request.getEmail())
-				.password(passwordEncoder.encode(request.getPassword()))
+				.email(request.email())
+				.password(passwordEncoder.encode(request.password()))
 				.role(Role.USER)
 				.build();
 		userRepo.save(user);
@@ -36,11 +36,11 @@ public class AuthenticationService {
 	public AuthenticationResponse authenticate(AuthenticationRequest request) {
 		authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
-				request.getEmail(),
-				request.getPassword()
+				request.email(),
+				request.password()
 		));
 
-		var user = userRepo.findByEmail(request.getEmail())
+		var user = userRepo.findByEmail(request.email())
 				.orElseThrow();
 		var jwtToken = jwtService.generateToken(user);
 		return AuthenticationResponse.builder()
