@@ -1,5 +1,6 @@
 package com.restAPISecurity.restAPI.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,13 +13,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
-	
-	@Autowired
-	private JwtAuthenticationFilter jwtAuthenticationFilter;
-	
-	@Autowired
-	private AuthenticationProvider authenticationProvider;
+
+	private final JwtAuthenticationFilter jwtAuthenticationFilter;
+
+	private final AuthenticationProvider authenticationProvider;
 	
 	@Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -28,7 +28,7 @@ public class SecurityConfig {
 				.disable()
                 .authorizeHttpRequests(
                         (authorize) -> authorize
-//                                .requestMatchers("/api/test/**").permitAll()
+//                                .requestMatchers("/api/test/**").hasRole("USER")
 								.requestMatchers("/api/v1/auth/**").permitAll()
                                 .anyRequest()
                                 .authenticated())
