@@ -36,9 +36,9 @@ public class AuthenticationService {
 	public AuthenticationResponse authenticate(AuthenticationRequest request) {
 		authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(
-				request.email(),
-				request.password()
-		));
+						request.email(),
+						request.password()
+				));
 
 		var user = userRepo.findByEmail(request.email())
 				.orElseThrow();
